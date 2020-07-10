@@ -11,6 +11,7 @@ class PNGParser
 {
 public:
 	void readPngFile(std::string filename, std::vector<std::vector<Vec3<float>>> &image);
+	void writePngFile(std::string file_name, std::vector<std::vector<Vec3<float>>> &image);
 };
 
 #endif

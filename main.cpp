@@ -108,8 +108,10 @@ void render(Scene &scene)
 		}
 	}
 
-	Ppm image;
-	image.writeFile(width, height, scene.getOutputFile(), frame_buffer);
+	//Ppm image;
+	//image.writeFile(width, height, scene.getOutputFile(), frame_buffer);
+	PNGParser p;
+	p.writePngFile(scene.getOutputFile(), frame_buffer);
 }
 
 int main(int argc, char *argv[])
