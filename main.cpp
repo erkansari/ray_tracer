@@ -95,6 +95,10 @@ void render(Scene &scene)
 	float scaley = tan(height / width * fovx);
 
 	std::vector<std::vector<Vec3<float>>> frame_buffer(height, std::vector<Vec3<float>>(width));
+
+	std::string output_file = scene.getOutputFile();
+	std::string extension = output_file.substr(output_file.find_last_of(".") + 1);
+
 	for(int i = 0; i < height; i++){
 		for(int j = 0; j < width; j++){
 			float x = ((2 * (j + 0.5) - width) / width) * scalex;
@@ -108,10 +112,15 @@ void render(Scene &scene)
 		}
 	}
 
-	//Ppm image;
-	//image.writeFile(width, height, scene.getOutputFile(), frame_buffer);
-	PNGParser p;
-	p.writePngFile(scene.getOutputFile(), frame_buffer);
+	if(extension == "ppm"){
+		Ppm image;
+		image.writeFile(width, height, output_file, frame_buffer);
+	}else if(extension == "png"){
+		PNGParser p;
+		p.writePngFile(output_file, frame_buffer);
+	}else{
+		std::cout << "unknown output file extension";
+	}
 }
 
 int main(int argc, char *argv[])
