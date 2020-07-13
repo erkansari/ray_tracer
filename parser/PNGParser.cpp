@@ -94,7 +94,12 @@ void PNGParser::writePngFile(std::string file_name, std::vector<std::vector<Vec3
 	for(int i = 0; i < height; i++){
 		free(row[i]);
 	}
+
 	free(row);
+
+	if (png && info){
+        png_destroy_write_struct(&png, &info);
+	}
 
 	fclose(file);
 }
